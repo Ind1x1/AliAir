@@ -2,19 +2,11 @@
 *   Leyi Ye 2025 (alpha) poject
 *   This project is used to test the nvlink p2p bandwidth and latenc
 */
-#include <cstdio> 
-#include <stdint.h>
-#include <vector>
+#include <stdio.h>
 #include <cuda.h>
 #include <nvshmem.h>
 #include <nvshmemx.h>
-#include <unistd.h>
-#include <ctype.h>
-#include <stdlib.h>
 
-
-#include <helper_cuda.h>
-#include <helper_timer.h>
 
 #undef CUDA_CHECK
 #define CUDA_CHECK(stmt)                                                          \
@@ -73,8 +65,6 @@ void outputNVSHMEMBandwidthRingMatrix(int numElems, int repeat)
     cudaSetDevice(mype_node);
     cudaStreamCreate(&stream);
     int npes = nvshmem_n_pes();
-
-    vector<double> bandwidthMatrix(npes * npes);
 
     int *destination = (int *) nvshmem_malloc(sizeof(int) * numElems);
     cudaCheckError();
