@@ -23,7 +23,7 @@ int main(int argc, char **argv)
     cudaStreamCreate(&stream);
 
     int *destination = (int *) nvshmem_malloc(sizeof(int));
-
+    
     simple_shift<<<1, 1, 0, stream>>>(destination);
     nvshmemx_barrier_all_on_stream(stream);
     cudaMemcpyAsync(&msg, destination, sizeof(int), cudaMemcpyDeviceToHost, stream);
